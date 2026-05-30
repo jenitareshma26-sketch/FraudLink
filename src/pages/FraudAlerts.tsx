@@ -68,27 +68,27 @@ const FraudAlerts: React.FC = () => {
                   {alertsForSeverity.map((alert) => (
                     <div
                       key={alert.id}
-                      className='rounded-lg border border-border-dark bg-dark-bg/50 p-3 sm:p-4 flex gap-3'
+                      className='rounded-lg border border-border-dark bg-dark-bg/50 p-3 sm:p-4 flex gap-3 items-start'
                     >
                       <div className='mt-0.5 shrink-0'>
                         <AlertTriangle className='text-danger' size={20} />
                       </div>
                       <div className='min-w-0 flex-1 space-y-3'>
-                        <div className='flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between'>
-                          <h4 className='text-white font-semibold text-sm sm:text-base leading-snug'>{alert.title}</h4>
-                          <span className={`${severityClass(alert.severity)} self-start text-xs sm:text-sm whitespace-nowrap`}>
-                            {alert.severity}
-                          </span>
+                        <div className='flex items-center gap-3'>
+                          <h4 className='text-white font-semibold text-sm sm:text-base leading-snug truncate'>{alert.title}</h4>
+                          <div className='ml-auto flex items-center gap-2'>
+                            <span className={`${severityClass(alert.severity)} text-xs sm:text-sm whitespace-nowrap`}>{alert.severity}</span>
+                          </div>
                         </div>
 
-                        <p className='text-text-secondary text-xs sm:text-sm leading-relaxed'>{alert.description}</p>
-                        <p className='text-text-secondary text-xs'>Affected: {alert.affectedUserName}</p>
+                        <p className='text-text-secondary text-xs sm:text-sm leading-relaxed max-h-16 overflow-hidden break-words'>{alert.description}</p>
+                        <p className='text-text-secondary text-xs'>Affected: <span className='font-medium'>{alert.affectedUserName}</span></p>
 
-                        <div className='flex flex-col sm:flex-row gap-2'>
+                        <div className='flex items-center justify-end gap-2'>
                           <button
                             type='button'
                             onClick={() => handleEscalate(alert.id)}
-                            className='btn-primary text-sm w-full sm:w-auto'
+                            className='btn-primary text-sm'
                             disabled={alert.escalated}
                           >
                             {alert.escalated ? 'Escalated' : 'Escalate'}
@@ -96,15 +96,16 @@ const FraudAlerts: React.FC = () => {
                           <button
                             type='button'
                             onClick={() => handleMarkReviewed(alert.id)}
-                            className='btn-secondary text-sm w-full sm:w-auto'
+                            className='btn-secondary text-sm'
                             disabled={alert.reviewed}
                           >
                             {alert.reviewed ? 'Reviewed' : 'Mark Reviewed'}
                           </button>
                         </div>
-                        <div className='flex flex-wrap gap-2 text-xs font-medium'>
+
+                        <div className='flex flex-wrap gap-2 text-xs font-medium mt-2'>
                           {alert.reviewed && <span className='badge-success'>Reviewed</span>}
-                          {alert.escalated && <span className='badge-warning'>Escalated to case management</span>}
+                          {alert.escalated && <span className='badge-warning'>Escalated</span>}
                         </div>
                       </div>
                     </div>
