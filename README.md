@@ -78,3 +78,28 @@ This prototype is provided without a license. Add a `LICENSE` file if you plan t
 
 ---
 Generated/updated by the local development assistant during an interactive coding session.
+
+## Deployment
+
+Notes for deploying to Render (or similar hosts) where devDependencies may not be installed by default.
+
+- Recommended: deploy as a **Static Site** on Render.
+	- Build Command: `npm run build:ci`
+	- Publish Directory: `dist`
+	- This `build:ci` script installs devDependencies needed for TypeScript and Vite before building.
+
+- If you must deploy as a Web Service (Node process), use:
+	- Build Command: `npm ci --include=dev && npm run build`
+	- Start Command: `npx serve -s dist -l $PORT`
+
+Common issues
+- TS2688 / cannot find type definition for `vite/client` or `node`: install devDependencies (types) before building. The `build:ci` script handles this for CI hosts.
+- Missing devDependencies on the host: ensure your host installs `devDependencies` or use `npm ci --include=dev` in the build step.
+
+Quick Render checklist
+1. Link your GitHub repository in Render and choose **Static Site**.
+2. Set build command to `npm run build:ci` and publish directory to `dist`.
+3. Add any environment variables under the Render Dashboard -> Environment (e.g. `VITE_API_URL`).
+4. Trigger a deploy; check logs for `npm ci` and `vite build` progress.
+
+If you want, I can add a `engines` field to `package.json` or create a `.render` build script. Which would you prefer?
