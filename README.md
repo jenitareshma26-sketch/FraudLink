@@ -1,73 +1,80 @@
-# React + TypeScript + Vite
+# FraudLink
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FraudLink is a prototype AI-assisted scam network detection dashboard built with Vite, React, and TypeScript. It includes mock data, visualizations (D3), charts (Recharts), and a simple Redux Toolkit store for auth, transactions, alerts and cases.
 
-Currently, two official plugins are available:
+## Features
+- Login (mock) with demo OTP
+- Dashboard with charts and summary stats
+- Scam network force-directed visualization (D3)
+- Transaction monitoring table with filters, CSV export, pagination, and quick actions (Flag / Escalate / Open Case)
+- Fraud alerts center with review & escalation actions
+- User profile investigation and case management placeholders
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech stack
+- Vite + React + TypeScript
+- Tailwind CSS for styling
+- Redux Toolkit for state management
+- D3.js for network visualization
+- Recharts for charts
 
-## React Compiler
+## Quick start
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Install dependencies:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Run development server (local):
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Run tests (if any):
+
+```bash
+npm test
+```
+
+## App routes
+- `/` — Login
+- `/dashboard` — Dashboard
+- `/network` — Scam network visualization
+- `/transactions` — Transaction monitoring
+- `/alerts` — Fraud alerts
+- `/profiles` — User profile investigation
+- `/cases` — Case management
+- `/devices` — Devices & IPs
+- `/analytics` — Risk analysis (placeholder)
+- `/reports` — Reports (placeholder)
+- `/settings` — Admin settings (placeholder)
+- `/notifications` — Notification center
+
+## Demo credentials
+- Email: `john@example.com`
+- Password: `password123`
+- Demo OTP: `123456`
+
+## Development notes
+- Mock data and types live in `src/data/mockData.ts` and `src/types`.
+- Redux slices are in `src/features/*Slice.ts` (auth, transactions, alerts, cases).
+- To re-enable or change mapping to a backend API, update `src/features/*Slice.ts` reducers and replace mock data usage with async thunks.
+
+## Contribution
+1. Fork the repository
+2. Create a feature branch
+3. Make changes, run `npm run build` to validate TypeScript
+4. Open a pull request with a clear description
+
+## License
+This prototype is provided without a license. Add a `LICENSE` file if you plan to publish.
+
+---
+Generated/updated by the local development assistant during an interactive coding session.
